@@ -30,8 +30,12 @@ async function main() {
     const urls = [dataCommitteeUrl];
     const addrsBytes = dataCommitteeAddress;
     const dataCommitteeContract = new ethers.Contract(dataCommitteeContractAddress, dataCommitteeContractJson.abi, deployer);
-    await dataCommitteeContract.setupCommittee(requiredAmountOfSignatures, urls, addrsBytes);
+    const tx = await dataCommitteeContract.setupCommittee(requiredAmountOfSignatures, urls, addrsBytes);
     console.log(`Committee seted up with ${dataCommitteeAddress}`);
+    console.log('Transaction hash:', tx.hash);
+    // Wait for receipt
+    const receipt = await tx.wait();
+    console.log('Transaction confirmed in block:', receipt.blockNumber);
     const actualAmountOfmembers = await dataCommitteeContract.getAmountOfMembers();
     expect(actualAmountOfmembers.toNumber()).to.be.equal(urls.length);
     
