@@ -3,8 +3,8 @@ const { expect } = require('chai');
 const ethers = require('ethers');
 require('dotenv').config();
 
-const deployOutput = require('./deploy_output.json');
-const dataCommitteeContractJson = require('../../compiled-contracts/CDKDataCommittee.json');
+const deployOutput = require('/shared/deploy_output.json');
+const dataCommitteeContractJson = require('/cdk-validium-contracts/compiled-contracts/CDKDataCommittee.json');
 
 const DEFAULT_DEPLOYER_PRIVATE_KEY = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
 const DEFAULT_DAC_ADDRESS = '0x70997970c51812dc3a010c7d01b50e0d17dc79c8';
