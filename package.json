@@ -83,7 +83,7 @@
     "compile": "npx hardhat compile",
     "docker:contracts": "./docker/scripts/deploy-geth-docker.sh",
     "setup:committee": "node docker/scripts/setup-committee.js",
-    "push:docker:contracts": "docker push hermeznetwork/geth-supernets2-contracts",
+    "push:docker:contracts": "docker push snapchain/geth-cdk-validium-contracts",
     "update:genesis": "node deployment/1_createGenesis.js && node deployment/1_createGenesis.js --test --input ../docker/scripts/deploy_parameters_docker.json --out ../docker/scripts/genesis_docker.json",
     "coverage": "npx hardhat coverage",
     "gas:report": "REPORT_GAS=true npx hardhat test",
