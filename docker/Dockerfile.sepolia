@@ -13,4 +13,4 @@ RUN npm install
 COPY . .
 COPY docker/scripts/deploy_parameters_docker.json deployment/deploy_parameters.json
 
-CMD ["npm", "run", "deploy:testnet:CDKValidium:sepoilla"]
+CMD ["npm", "run", "deploy:testnet:CDKValidium:sepolia"]

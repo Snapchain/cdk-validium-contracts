@@ -83,7 +83,7 @@
     "compile": "npx hardhat compile",
     "docker:contracts": "./docker/scripts/deploy-geth-docker.sh",
     "docker:dac:setup": "./docker/scripts/build-dac-setup-docker.sh",
-    "docker:sepoilla": "./docker/scripts/build-sepoilla-docker.sh",
+    "docker:sepolia": "./docker/scripts/build-sepolia-docker.sh",
     "setup:committee": "node docker/scripts/setup-committee.js",
     "push:docker:contracts": "docker push snapchain/geth-cdk-validium-contracts",
     "push:docker:contracts:dev": "docker image tag snapchain/geth-cdk-validium-contracts snapchain/geth-cdk-validium-contracts:dev && docker push snapchain/geth-cdk-validium-contracts:dev",
