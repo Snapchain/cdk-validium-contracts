@@ -106,8 +106,6 @@ async function main() {
         await deployer.sendTransaction(params);
     }
 
-    // set initialCDKValidiumDeployerOwner from deploy parameters with deployer address
-    deployParameters.initialCDKValidiumDeployerOwner = deployer.address;
     deployParameters.maticTokenAddress = maticTokenContract.address;
     fs.writeFileSync(pathDeployParameters, JSON.stringify(deployParameters, null, 1));
 }
