@@ -59,7 +59,7 @@
     "solidity-docgen": "^0.5.17"
   },
   "scripts": {
-    "saveDeployment:sepolia": "mkdir -p deployments/sepolia_$(date +%s) && cp -r deployment/deploy_*.json deployments/sepolia_$(date +%s) && cp .openzeppelin/sepolia.json deployments/sepolia_$(date +%s) && cp deployment/genesis.json deployments/sepolia_$(date +%s)",
+    "saveDeployment:sepolia": "mkdir -p deploymentOutput && cp deployment/deploy_*.json deploymentOutput",
     "saveDeployment:mainnet": "mkdir -p deployments/mainnet_$(date +%s) && cp -r deployment/deploy_*.json deployments/mainnet_$(date +%s) && cp .openzeppelin/mainnet.json deployments/mainnet_$(date +%s) && cp deployment/genesis.json deployments/mainnet_$(date +%s)",
     "test": "npx hardhat test test/contracts/**.test.js",
     "docgen": "npx solidity-docgen --solc-module solc-0.8 -t ./docs/templates -e ./contracts/verifiers,./contracts/mocks",
@@ -67,7 +67,7 @@
     "deploy:CDKValidium:localhost": "rm -f .openzeppelin/unknown-31337.json && node deployment/1_createGenesis.js && npx hardhat run deployment/2_deployCDKValidiumDeployer.js --network localhost && npx hardhat run deployment/3_deployContracts.js --network localhost",
     "deploy:testnet:CDKValidium:localhost": "npm run prepare:testnet:CDKValidium:localhost && npm run deploy:CDKValidium:localhost",
     "prepare:testnet:CDKValidium:sepolia": "npx hardhat run deployment/testnet/prepareTestnet.js --network sepolia",
-    "deploy:CDKValidium:sepolia": "node deployment/1_createGenesis.js && npx hardhat run deployment/3_deployContracts.js --network sepolia && npm run saveDeployment:sepolia",
+    "deploy:CDKValidium:sepolia": "node deployment/1_createGenesis.js && npm run deploy:deployer:CDKValidium:sepolia && npx hardhat run deployment/3_deployContracts.js --network sepolia && npm run saveDeployment:sepolia",
     "deploy:deployer:CDKValidium:sepolia": "npx hardhat run deployment/2_deployCDKValidiumDeployer.js --network sepolia",
     "verify:deployer:CDKValidium:sepolia": "npx hardhat run deployment/verifyCDKValidiumDeployer.js --network sepolia",
     "deploy:testnet:CDKValidium:sepolia": "npm run prepare:testnet:CDKValidium:sepolia && npm run deploy:CDKValidium:sepolia",
@@ -83,6 +83,7 @@
     "compile": "npx hardhat compile",
     "docker:contracts": "./docker/scripts/deploy-geth-docker.sh",
     "docker:dac:setup": "./docker/scripts/build-dac-setup-docker.sh",
+    "docker:sepoilla": "./docker/scripts/build-sepoilla-docker.sh",
     "setup:committee": "node docker/scripts/setup-committee.js",
     "push:docker:contracts": "docker push snapchain/geth-cdk-validium-contracts",
     "push:docker:contracts:dev": "docker image tag snapchain/geth-cdk-validium-contracts snapchain/geth-cdk-validium-contracts:dev && docker push snapchain/geth-cdk-validium-contracts:dev",
