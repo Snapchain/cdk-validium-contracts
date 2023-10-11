@@ -102,6 +102,7 @@
     "verify:CDKValidium:mumbai": "npx hardhat run deployment/verifyContracts.js --network mumbai",
 
     "deploy:generate:wallets": "node deployment/helpers/wallets.js",
-    "deploy:approve:matic": "node deployment/helpers/aoorive.js"
+    "deploy:approve:matic": "node deployment/helpers/approve.js",
+    "deploy:setup:comittee": "node deployment/helpers/setup-committee.js"
   }
 }
