@@ -1,7 +1,7 @@
 services:
   cdk-validium-mock-l1-network:
     container_name: cdk-validium-mock-l1-network
-    image: snapchain/geth-cdk-validium-contracts
+    image: snapchain/geth-cdk-validium-contracts:TAG
     ports:
       - 8545:8545
       - 8546:8546
@@ -33,7 +33,7 @@ services:
 
   dac-setup-committee:
     container_name: dac-setup-committee
-    image: snapchain/cdk-validium-contracts
+    image: snapchain/cdk-validium-contracts:TAG
     depends_on:
       cdk-validium-mock-l1-network:
         condition: service_started
