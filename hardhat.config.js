@@ -1,13 +1,12 @@
-require("dotenv").config();
-require("@nomiclabs/hardhat-waffle");
-require("hardhat-gas-reporter");
-require("solidity-coverage");
-require("@nomiclabs/hardhat-etherscan");
-require("@openzeppelin/hardhat-upgrades");
-require("hardhat-dependency-compiler");
+require('dotenv').config();
+require('@nomiclabs/hardhat-waffle');
+require('hardhat-gas-reporter');
+require('solidity-coverage');
+require('@nomiclabs/hardhat-etherscan');
+require('@openzeppelin/hardhat-upgrades');
+require('hardhat-dependency-compiler');
 
-const DEFAULT_MNEMONIC =
-  "test test test test test test test test test test test junk";
+const DEFAULT_MNEMONIC = 'test test test test test test test test test test test junk';
 
 /*
  * You need to export an object to set up your config
@@ -20,18 +19,18 @@ const DEFAULT_MNEMONIC =
 module.exports = {
   dependencyCompiler: {
     paths: [
-      "@openzeppelin/contracts/token/ERC20/presets/ERC20PresetFixedSupply.sol",
-      "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol",
-      "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol",
+      '@openzeppelin/contracts/token/ERC20/presets/ERC20PresetFixedSupply.sol',
+      '@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol',
+      '@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol',
     ], //,
     //keep: true
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.20",
+        version: '0.8.20',
         settings: {
-          evmVersion: "paris",
+          evmVersion: 'paris',
           optimizer: {
             enabled: true,
             runs: 999999,
@@ -39,16 +38,7 @@ module.exports = {
         },
       },
       {
-        version: "0.6.11",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 999999,
-          },
-        },
-      },
-      {
-        version: "0.5.12",
+        version: '0.6.11',
         settings: {
           optimizer: {
             enabled: true,
@@ -57,7 +47,16 @@ module.exports = {
         },
       },
       {
-        version: "0.5.16",
+        version: '0.5.12',
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 999999,
+          },
+        },
+      },
+      {
+        version: '0.5.16',
         settings: {
           optimizer: {
             enabled: true,
@@ -124,7 +123,7 @@ module.exports = {
       chainId: 80001,
     },
     localhost: {
-      url: "http://127.0.0.1:8545",
+      url: 'http://127.0.0.1:8545',
       accounts: {
         mnemonic: process.env.MNEMONIC || DEFAULT_MNEMONIC,
         path: "m/44'/60'/0'/0",
@@ -133,7 +132,7 @@ module.exports = {
       },
     },
     hardhat: {
-      initialDate: "0",
+      initialDate: '0',
       allowUnlimitedContractSize: true,
       accounts: {
         mnemonic: process.env.MNEMONIC || DEFAULT_MNEMONIC,
@@ -145,7 +144,7 @@ module.exports = {
   },
   gasReporter: {
     enabled: !!process.env.REPORT_GAS,
-    outputFile: process.env.REPORT_GAS_FILE ? "./gas_report.md" : null,
+    outputFile: process.env.REPORT_GAS_FILE ? './gas_report.md' : null,
     noColors: process.env.REPORT_GAS_FILE ? true : false,
   },
   etherscan: {

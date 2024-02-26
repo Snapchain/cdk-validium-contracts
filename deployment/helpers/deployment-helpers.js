@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop, no-use-before-define, no-lonely-if, import/no-dynamic-require */
 /* eslint-disable no-console, no-inner-declarations, no-undef, import/no-unresolved */
 const { expect } = require('chai');
-const { ethers, network } = require("hardhat");
+const { ethers, network } = require('hardhat');
 
 const gasPriceKeylessDeployment = '100'; // 100 gweis
 
