@@ -21,50 +21,50 @@ module.exports = {
     paths: [
       '@openzeppelin/contracts/token/ERC20/presets/ERC20PresetFixedSupply.sol',
       '@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol',
-      '@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol',
-    ], //,
+      '@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol'
+    ]//,
     //keep: true
   },
   solidity: {
     compilers: [
       {
-        version: '0.8.20',
+        version: "0.8.20",
         settings: {
           evmVersion: 'paris',
           optimizer: {
             enabled: true,
-            runs: 999999,
-          },
-        },
+            runs: 999999
+          }
+        }
       },
       {
-        version: '0.6.11',
+        version: "0.6.11",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 999999,
-          },
-        },
+            runs: 999999
+          }
+        }
       },
       {
-        version: '0.5.12',
+        version: "0.5.12",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 999999,
-          },
-        },
+            runs: 999999
+          }
+        }
       },
       {
-        version: '0.5.16',
+        version: "0.5.16",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 999999,
-          },
-        },
-      },
-    ],
+            runs: 999999
+          }
+        }
+      }
+    ]
   },
   networks: {
     mainnet: {
@@ -144,8 +144,8 @@ module.exports = {
   },
   gasReporter: {
     enabled: !!process.env.REPORT_GAS,
-    outputFile: process.env.REPORT_GAS_FILE ? './gas_report.md' : null,
-    noColors: process.env.REPORT_GAS_FILE ? true : false,
+    outputFile: process.env.REPORT_GAS_FILE ? "./gas_report.md" : null,
+    noColors: process.env.REPORT_GAS_FILE ? true : false
   },
   etherscan: {
     apiKey: {
