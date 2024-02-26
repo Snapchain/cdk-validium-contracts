@@ -8,10 +8,7 @@ const dataCommitteeContractJson = require("./compiled-contracts/CDKDataCommittee
 
 async function main() {
   const dataCommitteeContractAddress = deployOutput["cdkDataCommitteeContract"];
-  if (
-    dataCommitteeContractAddress === undefined ||
-    dataCommitteeContractAddress === ""
-  ) {
+  if (!dataCommitteeContractAddress) {
     throw new Error(`Missing DataCommitteeContract: ${deployOutput}`);
   }
   const dataCommitteeUrl = process.env.DAC_URL;

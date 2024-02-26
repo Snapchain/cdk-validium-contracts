@@ -24,5 +24,7 @@ async function main() {
   );
 }
 
-main();
-
+// to prevent execution by accident on import
+if (require.main === module) {
+    main();
+}
