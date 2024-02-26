@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop, no-use-before-define, no-lonely-if, import/no-dynamic-require */
 /* eslint-disable no-console, no-inner-declarations, no-undef, import/no-unresolved */
 const { expect } = require('chai');
-const { ethers } = require('hardhat');
+const { ethers, network } = require("hardhat");
 
 const gasPriceKeylessDeployment = '100'; // 100 gweis
 
@@ -16,12 +16,13 @@ async function deployCDKValidiumDeployer(deployerAddress, signer) {
     const gasPrice = ethers.BigNumber.from(ethers.utils.parseUnits(gasPriceKeylessDeployment, 'gwei'));
     const to = '0x'; // bc deployment transaction, "to" is "0x"
     const tx = {
-        to,
-        nonce: 0,
-        value: 0,
-        gasLimit: gasLimit.toHexString(),
-        gasPrice: gasPrice.toHexString(),
-        data: deployTxCDKValidiumDeployer,
+      to,
+      chainId: network.config.chainId ?? 0, // some RPCs only support replay-protected txs (EIP-155)
+      nonce: 0,
+      value: 0,
+      gasLimit: gasLimit.toHexString(),
+      gasPrice: gasPrice.toHexString(),
+      data: deployTxCDKValidiumDeployer,
     };
 
     const signature = {

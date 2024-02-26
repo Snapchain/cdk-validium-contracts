@@ -1,5 +1,6 @@
 coverage.json
 .env
+wallets.txt
 cache
 build
 yarn.lock

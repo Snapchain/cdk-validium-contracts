@@ -90,6 +90,18 @@
     "update:genesis": "node deployment/1_createGenesis.js && node deployment/1_createGenesis.js --test --input ../docker/scripts/deploy_parameters_docker.json --out ../docker/scripts/genesis_docker.json",
     "coverage": "npx hardhat coverage",
     "gas:report": "REPORT_GAS=true npx hardhat test",
-    "gas:report:file": "rm -f .openzeppelin/unknown-31337.json && REPORT_GAS=true REPORT_GAS_FILE=true npx hardhat test"
+    "gas:report:file": "rm -f .openzeppelin/unknown-31337.json && REPORT_GAS=true REPORT_GAS_FILE=true npx hardhat test",
+
+    "saveDeployment:mumbai": "mkdir -p deployments/mumbai_$(date +%s) && cp -r deployment/deploy_*.json deployments/mumbai_$(date +%s) && cp .openzeppelin/polygon-mumbai.json deployments/mumbai_$(date +%s) && cp deployment/genesis.json deployments/mumbai_$(date +%s) && mkdir -p deploymentOutput && cp deployment/deploy_*.json deploymentOutput",
+    "prepare:testnet:CDKValidium:mumbai": "npx hardhat run deployment/testnet/prepareTestnet.js --network mumbai",
+    "deploy:CDKValidium:mumbai": "node deployment/1_createGenesis.js && npx hardhat run deployment/3_deployContracts.js --network mumbai && npm run saveDeployment:mumbai",
+    "deploy:deployer:CDKValidium:mumbai": "npx hardhat run deployment/2_deployCDKValidiumDeployer.js --network mumbai",
+    "verify:deployer:CDKValidium:mumbai": "npx hardhat run deployment/verifyCDKValidiumDeployer.js --network mumbai",
+    "deploy:testnet:CDKValidium:mumbai": "npm run prepare:testnet:CDKValidium:mumbai && npm run deploy:CDKValidium:mumbai",
+    "verify:CDKValidium:mumbai": "npx hardhat run deployment/verifyContracts.js --network mumbai",
+
+    "deploy:generate:wallets": "node deployment/helpers/wallets.js",
+    "deploy:approve:matic": "node deployment/helpers/approve.js",
+    "deploy:setup:comittee": "node deployment/helpers/setup-committee.js"
   }
 }
