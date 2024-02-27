@@ -59,7 +59,7 @@
     "solidity-docgen": "^0.5.17"
   },
   "scripts": {
-    "saveDeployment:sepolia": "mkdir -p deployments/sepolia_$(date +%s) && cp -r deployment/deploy_*.json deployments/sepolia_$(date +%s) && cp .openzeppelin/unknown-11155111.json deployments/sepolia_$(date +%s) && cp deployment/genesis.json deployments/sepolia_$(date +%s) && mkdir -p deploymentOutput && cp deployment/deploy_*.json deploymentOutput",
+    "saveDeployment:sepolia": "mkdir -p deployments/sepolia_$(date +%s) && cp -r deployment/deploy_*.json deployments/sepolia_$(date +%s) && cp .openzeppelin/unknown-11155111.json deployments/sepolia_$(date +%s) && cp deployment/genesis.json deployments/sepolia_$(date +%s) && mkdir -p deploymentOutput && cp deployment/deploy_*.json deploymentOutput && cp deployment/genesis.json deploymentOutput",
     "saveDeployment:mainnet": "mkdir -p deployments/mainnet_$(date +%s) && cp -r deployment/deploy_*.json deployments/mainnet_$(date +%s) && cp .openzeppelin/mainnet.json deployments/mainnet_$(date +%s) && cp deployment/genesis.json deployments/mainnet_$(date +%s)",
     "test": "npx hardhat test test/contracts/**.test.js",
     "docgen": "npx solidity-docgen --solc-module solc-0.8 -t ./docs/templates -e ./contracts/verifiers,./contracts/mocks",
@@ -102,6 +102,7 @@
 
     "deploy:generate:wallets": "node deployment/helpers/wallets.js",
     "deploy:approve:matic": "npx hardhat run deployment/helpers/approve.js --network",
-    "deploy:setup:comittee": "npx hardhat run deployment/helpers/setup-committee.js --network"
+    "deploy:setup:comittee": "npx hardhat run deployment/helpers/setup-committee.js --network",
+    "deploy:merge:genesis": "node deployment/helpers/merge-genesis.js"
   }
 }
