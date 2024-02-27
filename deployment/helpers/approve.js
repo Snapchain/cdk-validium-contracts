@@ -1,3 +1,8 @@
+/*
+Usage: npm run deploy:approve:matic <network>
+*/
+
+
 const { ethers } = require("hardhat");
 require('dotenv').config();
 
@@ -17,11 +22,12 @@ async function main() {
     process.env.MATIC_TOKEN_ADDRESS
   );
   maticTokenContractWallet = maticTokenContract.connect(signer);
-  await maticTokenContractWallet.approve(
+  const res = await maticTokenContractWallet.approve(
   // From deployments/.../deploy_output.json cdkValidiumAddress
     process.env.CDK_VALIDIUM_ADDRESS,
     ethers.utils.parseEther("100.0")
   );
+  console.log(res);
 }
 
 // to prevent execution by accident on import
