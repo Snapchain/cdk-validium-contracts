@@ -102,6 +102,6 @@
 
     "deploy:generate:wallets": "node deployment/helpers/wallets.js",
     "deploy:approve:matic": "npx hardhat run deployment/helpers/approve.js --network",
-    "deploy:setup:comittee": "node deployment/helpers/setup-committee.js"
+    "deploy:setup:comittee": "npx hardhat run deployment/helpers/setup-committee.js --network"
   }
 }
