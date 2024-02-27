@@ -9,7 +9,7 @@ const fs = require('fs');
 // Assuming the second JSON is stored as config.json and genesis.json respectively
 const genesisFilePath = 'deploymentOutput/genesis.json';
 const deployOutFilePath = 'deploymentOutput/deploy_output.json';
-const outputFilePath = 'deploymentOutput/merged_genesis.json';
+const outputFilePath = 'deploymentOutput/genesis.config.json';
 
 function main() {
     // Get the network argument from the command line
