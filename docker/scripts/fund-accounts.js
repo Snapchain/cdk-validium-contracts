@@ -18,7 +18,7 @@ async function main() {
         const params = [{
             from: await signerNode.getAddress(),
             to: accountWallet.address,
-            value: '0x3635C9ADC5DEA00000',
+            value: '0x3635C9ADC5DEA00000', // 1000 Ether
         }];
         const tx = await currentProvider.send('eth_sendTransaction', params);
         if (i === numAccountsToFund - 1) {
