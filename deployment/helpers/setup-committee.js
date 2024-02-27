@@ -1,5 +1,8 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
+/*
+ *Usage: npm run setup:comitte <network>
+ */
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
 require('dotenv').config();
