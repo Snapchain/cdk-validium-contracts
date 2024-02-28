@@ -13,8 +13,8 @@ async function main() {
     // Load provider
     const { provider } = ethers;
 
-    // Load signer
-    const signer = (await ethers.getSigners())[0];
+    // Load signer - sequence sender
+    const signer = (await ethers.getSigners())[1];
 
     const maticTokenFactory = await ethers.getContractFactory(
         'ERC20PermitMock',
