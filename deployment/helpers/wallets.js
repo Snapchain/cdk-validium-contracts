@@ -11,10 +11,10 @@ async function main() {
 
     const arrayNames = [
         '## Deployment Address',
-        '\\n\\n## Trusted sequencer',
-        '\\n\\n## Trusted aggregator',
-        '\\n\\n## DAC member',
-        '\\n\\n## Claim tx manager',
+        '## Trusted sequencer',
+        '## Trusted aggregator',
+        '## DAC member',
+        '## Claim tx manager',
     ];
 
     // Generate a single mnemonic for all wallets
