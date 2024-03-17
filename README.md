@@ -10,26 +10,40 @@ npm i
 cp .env.example .env
 ```
 
-## Build Docker Images
+## Build the mock L1 image with deployed CDK contracts
 
-To build the Docker images, first run:
+Run
 
 ```bash
-npm run docker:build:1
+sudo TAG=<tag> npm run docker:build:mock-l1
 ```
 
-This will create a new Docker image named `snapchain/geth-cdk-validium-contracts:local`, which includes a Geth node with the deployed contracts. The deployment output can be found at `docker/deploymentOutput/deploy_output.json`.
+This will create a new Docker image named `snapchain/geth-cdk-validium-contracts:<tag>`, which includes a Geth node with the deployed contracts. The deployment output can be found at `docker/deploymentOutput/deploy_output.json`.
 
 To run the Docker container, use:
 
 ```bash
-docker run -p 8545:8545 snapchain/geth-cdk-validium-contracts:local
+docker run -p 8545:8545 snapchain/geth-cdk-validium-contracts:<tag>
 ```
 
-Now run:
+Note: if the new image will be used in https://github.com/Snapchain/zkValidium-quickstart/blob/main/docker-compose.yml, we also need to:
+- get the genesis block number in `docker/deploymentOutput/deploy_output.json`
+- update [the genesis file](https://github.com/Snapchain/zkValidium-quickstart/blob/main/config/node/genesis.config.json)
+    - use `deployment/genesis.json` to update the `root` and `genesis` fields
+    - use the genesis block number to update the `genesisBlockNumber` field
+    - use `docker/deploymentOutput/deploy_output.json` to update the `l1Config` field
+        - `maticTokenAddress` likely needs to be updated
+- update [the bridge config file](https://github.com/Snapchain/zkValidium-quickstart/blob/main/config/bridge/config.toml)
+    - `GenBlockNumber`: the updated genesis block number
+    - `L2PolygonBridgeAddresses`: "PolygonZkEVMBridge implementation" contract in [the genesis file](https://github.com/Snapchain/zkValidium-quickstart/blob/main/config/node/genesis.config.json)
+- update `POLYGON_ZK_EVM_BRIDGE_CONTRACT_ADDRESS` in the [compose file](https://github.com/Snapchain/zkValidium-quickstart/blob/main/docker-compose.yml) and a few other contract addresses if needed
+
+## Build the cdk-validium-contracts image
+
+Run
 
 ```bash
-npm run docker:build:2
+sudo TAG=<tag> npm run docker:build
 ```
 
 This will create a new Docker image named `snapchain/cdk-validium-contracts:local`, which contains this entire repo. This is useful to run one-off operational commands.
@@ -43,18 +57,12 @@ docker login -u snapchain
 
 If you don't have the access token, create one at: https://hub.docker.com/settings/security.
 
-Then you can push the images built from previous step by specifying a tag:
+Then you can push the images built from previous step:
 
 ```bash
-TAG=<your tag> npm run docker:push:1
-TAG=<your tag> npm run docker:push:2
+TAG=<tag> npm run docker:push:mock-l1
+TAG=<tag> npm run docker:push
 ```
-
-Note: need to update https://github.com/Snapchain/zkValidium-quickstart
-- reference the new images in docker-compose.yml
-- get the genesis block number in docker/deploymentOutput/deploy_output.json
-- update `genesisBlockNumber` in config/node/genesis.config.json
-- update `GenBlockNumber` in config/bridge/config.toml
 
 ## Test
 On a linux machine with amd64 architecture, copy docker/docker-compose.dac-setup.yml to docker-compose.yml, run
@@ -70,9 +78,9 @@ dac-setup-committee           |
 dac-setup-committee           | > cdk-validium-contracts@0.0.1 setup:committee
 dac-setup-committee           | > node docker/scripts/setup-committee.js
 dac-setup-committee           | 
-dac-setup-committee           | DAC_URL: http://supernets2-data-availability:8444
+dac-setup-committee           | DAC_URL: http://zkevm-data-availability:8444
 dac-setup-committee           | DAC_ADDRESS: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
-dac-setup-committee           | JSONRPC_HTTP_URL: http://supernets2-mock-l1-network:8545
+dac-setup-committee           | JSONRPC_HTTP_URL: http://zkevm-mock-l1-network:8545
 dac-setup-committee           | Using pvtKey deployer with address:  0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 dac-setup-committee           | Committee seted up with 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
 dac-setup-committee           | Transaction hash: 0x5d6d090ff6cd632802aa8456acc3f34804fefa8fd87d41ad09e2015b5c661695
