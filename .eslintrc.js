@@ -7,6 +7,9 @@ module.exports = {
         mocha: true,
     },
     extends: 'airbnb-base',
+    parserOptions: {
+        ecmaVersion: 'latest',
+    },
     rules: {
         indent: ['error', 4],
         'mocha/no-exclusive-tests': 'error',

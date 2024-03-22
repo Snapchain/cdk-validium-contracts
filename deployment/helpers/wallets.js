@@ -1,3 +1,6 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
+
 const ethers = require('ethers');
 const fs = require('fs');
 

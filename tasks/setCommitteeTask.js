@@ -1,21 +1,21 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 /*
- *Usage: npm run setup:comitte <network>
+ *Usage: npx hardhat setCommitteeTask --network <network> <url> <memberAddress>
  */
 const { expect } = require('chai');
-const { ethers } = require('hardhat');
-require('dotenv').config();
+const { task } = require('hardhat/config');
 
-const deployOutput = require('../../deploymentOutput/deploy_output.json');
+const deployOutput = require('../deploymentOutput/deploy_output.json');
 
-async function main() {
+async function setCommitteeTask(taskArgs, hre) {
     const dataCommitteeContractAddress = deployOutput.cdkDataCommitteeContract;
     if (!dataCommitteeContractAddress) {
         throw new Error(`Missing DataCommitteeContract: ${deployOutput}`);
     }
 
     // Load provider
+    const { ethers } = hre;
     const { provider } = ethers;
 
     // Load signer
@@ -25,37 +25,32 @@ async function main() {
         'CDKDataCommittee',
         provider,
     );
-    const cdkDACContract = cdkDACFactory.attach(
-        dataCommitteeContractAddress,
-    );
+    const cdkDACContract = cdkDACFactory.attach(dataCommitteeContractAddress);
     const cdkDACContractWallet = cdkDACContract.connect(signer);
 
-    const dataCommitteeUrl = process.env.DAC_URL;
-    const dataCommitteeMemberAddress = process.env.DAC_MEMBER_ADDRESS;
-
     const requiredAmountOfSignatures = 1;
-    const urls = [dataCommitteeUrl];
-    const addrsBytes = dataCommitteeMemberAddress;
+    const urls = [taskArgs.url];
+    const addrsBytes = taskArgs.memberAddress;
+
+    const daMember = await cdkDACContract.members(0);
+    console.log('current DA member: ', daMember);
 
     const tx = await cdkDACContractWallet.setupCommittee(
         requiredAmountOfSignatures,
         urls,
         addrsBytes,
     );
-    console.log(`Committee seted up with ${dataCommitteeMemberAddress}`);
     console.log('Transaction hash:', tx.hash);
     // Wait for receipt
     const receipt = await tx.wait();
     console.log('Transaction confirmed in block:', receipt.blockNumber);
     const actualAmountOfmembers = await cdkDACContract.getAmountOfMembers();
+    const newDaMember = await cdkDACContract.members(0);
+    console.log('new DA member: ', newDaMember);
     expect(actualAmountOfmembers.toNumber()).to.be.equal(urls.length);
 }
 
-if (require.main === module) {
-    main()
-        .then(() => process.exit(0))
-        .catch((error) => {
-            console.error(error);
-            process.exit(1);
-        });
-}
+task('setCommitteeTask', 'set DA committee')
+    .addPositionalParam('url')
+    .addPositionalParam('memberAddress')
+    .setAction(setCommitteeTask);
