@@ -46,7 +46,7 @@ services:
     command:
       - "/bin/sh"
       - "-c"
-      - "npm run setup:committee" 
+      - "npm run setComittee:localhost http://cdk-validium-data-availability:8444 0x70997970c51812dc3a010c7d01b50e0d17dc79c8" 
 
 volumes:
   deploy-output:

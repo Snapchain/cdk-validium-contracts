@@ -86,7 +86,6 @@
     "docker:build": "./docker/scripts/build-docker.sh",
     "docker:push:mock-l1": "npm run docker:tag:check && docker push snapchain/geth-cdk-validium-contracts:$TAG",
     "docker:push": "npm run docker:tag:check && docker push snapchain/cdk-validium-contracts:$TAG",
-    "setup:committee": "node docker/scripts/setup-committee.js",
     "update:genesis": "node deployment/1_createGenesis.js && node deployment/1_createGenesis.js --test --input ../docker/scripts/deploy_parameters_docker.json --out ../docker/scripts/genesis_docker.json",
     "coverage": "npx hardhat coverage",
     "gas:report": "REPORT_GAS=true npx hardhat test",
@@ -102,6 +101,7 @@
 
     "deploy:generate:wallets": "node deployment/helpers/wallets.js",
     "deploy:approve:matic": "npx hardhat run deployment/helpers/approve.js --network",
+    "setComittee:localhost": "npx hardhat setCommitteeTask --network localhost",
     "setComittee:sepolia": "npx hardhat setCommitteeTask --network sepolia",
     "setSequencerUrl:sepolia": "npx hardhat setSequencerUrlTask --network sepolia",
     "deploy:merge:genesis": "node deployment/helpers/merge-genesis.js"
