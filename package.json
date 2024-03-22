@@ -79,7 +79,7 @@
     "upgrade:timelock:mainnet": "npx hardhat run upgrade/timeLockUpgrade.js --network mainnet",
     "verify:CDKValidium:mainnet": "npx hardhat run deployment/verifyContracts.js --network mainnet",
     "lint": "npx eslint ./test && npx eslint ./docker/scripts && npx eslint ./deployment && npx eslint ./src",
-    "lint:fix": "npx eslint ./test --fix && npx eslint ./docker/scripts --fix && npx eslint ./deployment --fix && npx eslint ./src --fix",
+    "lint:fix": "npx eslint ./test --fix && npx eslint ./docker/scripts --fix && npx eslint ./deployment --fix && npx eslint ./src --fix && npx eslint ./tasks --fix",
     "compile": "npx hardhat compile",
     "docker:tag:check": "if [ -z \"$TAG\" ]; then echo \"TAG not set!\" && exit 1; fi",
     "docker:build:mock-l1": "npm run docker:tag:check && ./docker/scripts/deploy-geth-docker.sh",
