@@ -102,7 +102,7 @@
 
     "deploy:generate:wallets": "node deployment/helpers/wallets.js",
     "deploy:approve:matic": "npx hardhat run deployment/helpers/approve.js --network",
-    "deploy:setup:comittee": "npx hardhat run deployment/helpers/setup-committee.js --network",
+    "setComittee:sepolia": "npx hardhat setCommitteeTask --network sepolia",
     "setSequencerUrl:sepolia": "npx hardhat setSequencerUrlTask --network sepolia",
     "deploy:merge:genesis": "node deployment/helpers/merge-genesis.js"
   }

@@ -6,6 +6,7 @@ require('@nomiclabs/hardhat-etherscan');
 require('@openzeppelin/hardhat-upgrades');
 require('hardhat-dependency-compiler');
 require("./tasks/setSequencerUrlTask");
+require("./tasks/setCommitteeTask");
 
 const DEFAULT_MNEMONIC = 'test test test test test test test test test test test junk';
 
