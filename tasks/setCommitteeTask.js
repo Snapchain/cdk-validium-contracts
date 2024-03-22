@@ -50,7 +50,6 @@ async function setCommitteeTask(taskArgs, hre) {
   expect(actualAmountOfmembers.toNumber()).to.be.equal(urls.length);
 }
 
-
 task("setCommitteeTask", "set DA committee")
   .addPositionalParam("url")
   .addPositionalParam("memberAddress")
